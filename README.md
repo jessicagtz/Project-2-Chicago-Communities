@@ -5,4 +5,4 @@
 ## housing table -> data\housing_table.csv 
 ## ***UPDATED TABLE -> data\housing_table_2010.csv 
 ## twitter handles -> data\twitter_handles.csv
-## crime table -> [in-progress]
+## crime table -> data\CrimeType2017.csv
