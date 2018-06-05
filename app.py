@@ -24,11 +24,11 @@ app = Flask(__name__)
 #################################################
 from flask_sqlalchemy import SQLAlchemy
 # The database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///chi_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///chi_db.sqlite"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
-engine = create_engine("sqlite:///chi_db")
+engine = create_engine("sqlite:///chi_db.sqlite")
 inspector = inspect(engine)
 
 db = SQLAlchemy(app)
