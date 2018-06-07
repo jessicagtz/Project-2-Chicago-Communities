@@ -35,6 +35,7 @@ Neighborhoods = Base.classes.neighborhoods
 Twitter = Base.classes.twitter
 Population = Base.classes.population
 Race = Base.classes.race
+Crime = Base.classes.crime
 
 # Create our session (link) from Python to the DB
 session = Session(engine)
@@ -120,9 +121,26 @@ def dash(ID):
         hood_dict["Neighborhoods"] = hood.neighborhoods
         all_neighborhoods.append(hood_dict)
     neighborhood_data = jsonify(all_neighborhoods)
+
+    #query the crime data for chart based off of ID
+    crimes = session.query(Crime).filter(Crime.id == ID)
+
+    crime_data = []
+    for crime in crimes:
+        crime_dict = {}
+        crime_dict["ID"] = crime.id
+        crime_dict["battery"] = crime.battery
+        crime_dict["deceptive_practice"] = crime.deceptive_practice
+        crime_dict["homicide"] = crime.homicide
+        crime_dict["narcotics"] = crime.narcotics
+        crime_dict["non_criminal"] = crime.non_criminal
+        crime_dict["sexual"] = crime.sexual
+        crime_dict["theft"] = crime.theft
+        crime_data.append(crime_dict)
+    crimes2017 = jsonify(crime_data)
     
     # render the template
-    return render_template("index.html", comm_dict=comm_dict, handle_dict=handle_dict, pop_dict=pop_dict, demo_dict=demo_dict, hood_dict=hood_dict)
+    return render_template("index.html", comm_dict=comm_dict, handle_dict=handle_dict, pop_dict=pop_dict, demo_dict=demo_dict, hood_dict=hood_dict, crime_dict=crime_dict)
 
 
 @app.route("/twitter/<ID>")
@@ -216,6 +234,25 @@ def race(ID):
         race.append(demo_dict)
     
     return jsonify(race)
+
+@app.route("/crime/<ID>")
+def crime(ID):
+    crimes = session.query(Crime).filter(Crime.id == ID)
+
+    crime_data = []
+    for crime in crimes:
+        crime_dict = {}
+        crime_dict["ID"] = crime.id
+        crime_dict["battery"] = crime.battery
+        crime_dict["deceptive_practice"] = crime.deceptive_practice
+        crime_dict["homicide"] = crime.homicide
+        crime_dict["narcotics"] = crime.narcotics
+        crime_dict["non_criminal"] = crime.non_criminal
+        crime_dict["sexual"] = crime.sexual
+        crime_dict["theft"] = crime.theft
+        crime_data.append(crime_dict)
+    
+    return jsonify(crime_data)
 
 
 if __name__ == '__main__':

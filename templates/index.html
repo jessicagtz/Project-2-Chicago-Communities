@@ -23,13 +23,36 @@
             <div class="col-md-10">
                 <div class="col-md-6">
                     <div id="facts">
-                        <h4><strong>Neighborhoods</strong></h4>
-                        <li>{{hood_dict.Neighborhoods}}</li>
+                        <h3><strong>Neighborhoods</strong></h3>
+                        <li><strong>{{hood_dict.Neighborhoods}}</strong></li>
 
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div id="crime">22222Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                    <div id="crime">
+                        <canvas id="polar-chart" width="800" height="450"></canvas>
+                        <script>
+                        new Chart(document.getElementById("polar-chart"), {
+                        type: 'polarArea',
+                        data: {
+                        labels: ["Battery", "Deceptive Practice", "Homicide", "Narcotics", "Non Criminal", "Sexual", "Theft"],
+                        datasets: [
+                            {
+                            label: "Crime Types",
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#4dffdb","#3cba9f","#e8c3b9","#c45850","#ffad33"],
+                            data: [{{crime_dict.battery}},{{crime_dict.deceptive_practice}},{{crime_dict.homicide}},{{crime_dict.narcotics}},{{crime_dict.non_criminal}},{{crime_dict.sexual}},{{crime_dict.theft}}]
+                            }
+                        ]
+                        },
+                        options: {
+                        title: {
+                            display: true,
+                            text: 'Community Crimes (2017)'
+                        }
+                        }
+                    });
+                        </script>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div id="population">
