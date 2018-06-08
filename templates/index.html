@@ -4,125 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chicago Communities Dashboard</title>
+    <title>Chicago Communities Homepage</title>
+    <!-- <link rel="stylesheet" type="text/css" href="bootstrap"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="bootstrap stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/3/cerulean/bootstrap.min.css"/>
+    
     
 </head>
 <body>   
-    <div id="container" class="custom-container container">
+    <div id="container">
         <div class="row">
-            <div id="root">
-                <h1 align="center"><strong>{{comm_dict.name}}</strong></h1>
-            </div> 
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-10">
-                <div class="col-md-6">
-                    <div id="facts">
-                        <h3><strong>Neighborhoods</strong></h3>
-                        <li><strong>{{hood_dict.Neighborhoods}}</strong></li>
-
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div id="crime">
-                        <canvas id="polar-chart" width="800" height="450"></canvas>
-                        <!--The following script for the charts was tweaked from code found 
-                            at http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/#5-polar-area-chart -->
-                        <script>
-                        new Chart(document.getElementById("polar-chart"), {
-                        type: 'polarArea',
-                        data: {
-                        labels: ["Battery", "Deceptive Practice", "Homicide", "Narcotics", "Non Criminal", "Sexual", "Theft"],
-                        datasets: [
-                            {
-                            label: "Crime Types",
-                            backgroundColor: ["#3e95cd", "#8e5ea2","#4dffdb","#3cba9f","#e8c3b9","#c45850","#ffad33"],
-                            data: [{{crime_dict.battery}},{{crime_dict.deceptive_practice}},{{crime_dict.homicide}},{{crime_dict.narcotics}},{{crime_dict.non_criminal}},{{crime_dict.sexual}},{{crime_dict.theft}}]
-                            }
-                        ]
-                        },
-                        options: {
-                        title: {
-                            display: true,
-                            text: 'Community Crimes (2017)'
-                        }
-                        }
-                    });
-                        </script>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div id="population">
-                        <canvas id="line-chart" max-width=350 max-height=350></canvas>
-                        <script>
-                        new Chart(document.getElementById("line-chart"), {
-                                type: 'line',
-                                data: {
-                                  labels: ["1930","1940","1950","1960","1970","1980","1990","2000","2010","2015"],
-                                  datasets: [{
-                                    label: "Chicago Population (hundreds)",
-                                    type: "line",
-                                    borderColor: "#8e5ea2",
-                                    data: [{{pop_dict.all_1930}}/100,{{pop_dict.all_1940}}/100,{{pop_dict.all_1950}}/100,{{pop_dict.all_1960}}/100,{{pop_dict.all_1970}}/100,{{pop_dict.all_1980}}/100,{{pop_dict.all_1990}}/100,{{pop_dict.all_2000}}/100,{{pop_dict.all_2010}}/100,{{pop_dict.all_2015}}/100],
-                                    fill: false
-                                    }, {
-                                      label: "Community Population",
-                                      type: "line",
-                                      borderColor: "#3e95cd",
-                                      data: [{{pop_dict._1930}},{{pop_dict._1940}},{{pop_dict._1950}},{{pop_dict._1960}},{{pop_dict._1970}},{{pop_dict._1980}},{{pop_dict._1990}},{{pop_dict._2000}},{{pop_dict._2010}},{{pop_dict._2015}}],
-                                      fill: false  
-                                    }
-                                  ]
-                                },
-                                options: {
-                                  title: {
-                                    display: true,
-                                    text: 'Population Change'
-                                  },
-                                  legend: { display: true }
-                                }
-                              });</script>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div id="demographics">
-                        <canvas id="doughnut-chart" max-width=400  max-height=400></canvas>
-                        <script>
-                            new Chart(document.getElementById("doughnut-chart"), {
-                            type: 'doughnut',
-                            data: {
-                            labels: ["Asian", "Black", "Hispanic", "Other", "White"],
-                            datasets: [
-                                {
-                                label: "Community Demographics",
-                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                data: [{{demo_dict.asian2015}},{{demo_dict.black2015}},{{demo_dict.hispanic2015}},{{demo_dict.other2015}},{{demo_dict.white2015}}]
-                                }
-                            ]
-                            },
-                            options: {
-                            title: {
-                                display: true,
-                                text: 'Community Demographics (2015)'
-                            }
-                            }
-                        });
-                        </script>
-                    </div>
-                </div>
-            </div>   
-            <div class="col-md-2">
-                <div id="twitter">
-                    <a class="twitter-timeline" href="https://twitter.com/{{handle_dict.handle}}?ref_src=twsrc%5Etfw">Tweets by Community</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
+            <div class="col-md-12">
+                    <nav class="navbar navbar-inverse">
+                            <div class="container-fluid">
+                              <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                                  <span class="sr-only">Toggle navigation</span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="/">Home</a>
+                              </div>
+                          
+                              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                <ul class="nav navbar-nav">
+                                  
+                                  <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Chicago Communities <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                        <div class="row" style="width: 400px;">
+                                            <ul class="list-unstyled col-md-3">
+                                                <li><strong>Central</strong></li>  
+                                                <li><a href="/dash/8">Near North Side</a></li>
+                                                <li><a href="/dash/32">Loop</a></li>
+                                                <li><a href="/dash/33">Near South Side</a></li>
+                                                <li class="divider"></li>
+                                                <li><strong>North Side</strong></li>
+                                                <li><a href="/dash/5">North Center</a></li>
+                                                <li><a href="/dash/6">Lake View</a></li>
+                                                <li><a href="/dash/7">Lincoln Park</a></li>
+                                                <li><a href="/dash/21">Avondale</a></li>
+                                                <li><a href="/dash/22">Logan Square</a></li>
+                                                <li class="divider"></li>
+                                                <li><strong>Far North Side</strong></li>  
+                                                <li><a href="/dash/1">Rogers Park</a></li>
+                                                <li><a href="/dash/2">West Ridge</a></li>
+                                                <li><a href="/dash/3">Uptown</a></li>
+                                                <li><a href="/dash/4">Lincoln Square</a></li>
+                                                <li><a href="/dash/9">Edison Park</a></li>
+                                                <li><a href="/dash/10">Norwood Park</a></li>
+                                                <li><a href="/dash/11">Jefferson Park</a></li>
+                                                <li><a href="/dash/12">Forest Glen</a></li>
+                                                <li><a href="/dash/13">North Park</a></li>
+                                                <li><a href="/dash/14">Albany Park</a></li>
+                                                <li><a href="/dash/76">O'Hare</a></li>
+                                                <li><a href="/dash/77">Edgewater</a></li>
+                                            </ul>
+                                            <ul class="list-unstyled col-md-3">
+                                                <li><strong>Northwest Side</strong></li>  
+                                                <li><a href="/dash/15">Portage Park</a></li>
+                                                <li><a href="/dash/16">Irving Park</a></li>
+                                                <li><a href="/dash/17">Dunning</a></li>
+                                                <li><a href="/dash/18">Montclare</a></li>
+                                                <li><a href="/dash/19">Belmont Cragin</a></li>
+                                                <li><a href="/dash/20">Hermosa</a></li>
+                                                <li class="divider"></li>
+                                                <li><strong>West Side</strong></li>
+                                                <li><a href="/dash/23">Humboldt Park</a></li>
+                                                <li><a href="/dash/24">West Town</a></li>
+                                                <li><a href="/dash/25">Austin</a></li>
+                                                <li><a href="/dash/26">West Garfield Park</a></li>
+                                                <li><a href="/dash/27">East Garfield Park</a></li>
+                                                <li><a href="/dash/28">Near West Side</a></li>
+                                                <li><a href="/dash/29">North Lawndale</a></li>
+                                                <li><a href="/dash/30">South Lawndale</a></li>
+                                                <li><a href="/dash/31">Lower West Side</a></li>
+                                            </ul>
+                                            <ul class="list-unstyled col-md-3">
+                                                <li><strong>South Side</strong></li>  
+                                                <li><a href="/dash/34">Armour Square</a></li>
+                                                <li><a href="/dash/35">Douglas</a></li>
+                                                <li><a href="/dash/36">Oakland</a></li>
+                                                <li><a href="/dash/37">Fuller Park</a></li>
+                                                <li><a href="/dash/38">Grand Boulevard</a></li>
+                                                <li><a href="/dash/39">Kenwood</a></li>
+                                                <li><a href="/dash/40">Washington Park</a></li>
+                                                <li><a href="/dash/41">Hyde Park</a></li>
+                                                <li><a href="/dash/42">Woodlawn</a></li>
+                                                <li><a href="/dash/43">South Shore</a></li>
+                                                <li><a href="/dash/60">Bridgeport</a></li>
+                                                <li><a href="/dash/69">Greater Grand Crossing</a></li>
+                                                <li class="divider"></li>
+                                                <li><strong>Southwest Side</strong></li>  
+                                                <li><a href="/dash/56">Garfield Ridge</a></li>
+                                                <li><a href="/dash/57">Archer Heights</a></li>
+                                                <li><a href="/dash/58">Brighton Park</a></li>
+                                                <li><a href="/dash/59">McKinley Park</a></li>
+                                                <li><a href="/dash/61">New City</a></li>
+                                                <li><a href="/dash/62">West Elsdon</a></li>
+                                                <li><a href="/dash/63">Gage Park</a></li>
+                                                <li><a href="/dash/64">Clearing</a></li>
+                                                <li><a href="/dash/65">West Lawn</a></li>
+                                                <li><a href="/dash/66">Chicago Lawn</a></li>
+                                                <li><a href="/dash/67">West Englewood</a></li>
+                                                <li><a href="/dash/68">Englewood</a></li>
+                                                </ul>
+                                                <ul class="list-unstyled col-md-3">
+                                                <li><strong>Far Southeast Side</strong></li>
+                                                <li><a href="/dash/44">Chatham</a></li>
+                                                <li><a href="/dash/45">Avalon Park</a></li>
+                                                <li><a href="/dash/46">South Chicago</a></li>
+                                                <li><a href="/dash/47">Burnside</a></li>
+                                                <li><a href="/dash/48">Calumet Heights</a></li>
+                                                <li><a href="/dash/49">Roseland</a></li>
+                                                <li><a href="/dash/50">Pullman</a></li>
+                                                <li><a href="/dash/51">South Deering</a></li>
+                                                <li><a href="/dash/52">East Side</a></li>
+                                                <li><a href="/dash/53">West Pullman</a></li>
+                                                <li><a href="/dash/54">Riverdale</a></li>
+                                                <li><a href="/dash/55">Hegewisch</a></li>
+                                                <li class="divider"></li>
+                                                <li><strong>Far Southwest Side</strong></li>  
+                                                <li><a href="/dash/70">Ashburn</a></li>
+                                                <li><a href="/dash/71">Auburn Gresham</a></li>
+                                                <li><a href="/dash/72">Beverly</a></li>
+                                                <li><a href="/dash/73">Washington Heights</a></li>
+                                                <li><a href="/dash/74">Mount Greenwood</a></li>
+                                                <li><a href="/dash/75">Morgan Park</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                              </li>
+                            </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                  <li><a href="/about">About</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </nav>
             </div>
         </div>
-        
+    </div>
+    <div id="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1 align="center">Chicago Communities</h1>
+                <p align="center">A closer look at the 77 unique communities that make up Chicago</p>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img width=450 height=450 href="../graph_sample.jpg"></img>
+            </div>
+            <div class="col-md-6">
+                <img width=450 height=450 href="../graph_sample.jpg"></img>
+            </div>
+        </div> 
+
     </div>
 </body>
 </html>
