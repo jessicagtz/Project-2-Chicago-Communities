@@ -44,6 +44,13 @@ session = Session(engine)
 # Flask Routes
 #################################################
 
+@app.route("/")
+def index():
+
+
+    #render the index template
+    return render_template("index.html")
+
 @app.route("/dash/<ID>")
 def dash(ID):
     # query for the community name based off of ID selected
@@ -140,7 +147,7 @@ def dash(ID):
     crimes2017 = jsonify(crime_data)
     
     # render the template
-    return render_template("index.html", comm_dict=comm_dict, handle_dict=handle_dict, pop_dict=pop_dict, demo_dict=demo_dict, hood_dict=hood_dict, crime_dict=crime_dict)
+    return render_template("dashboard.html", comm_dict=comm_dict, handle_dict=handle_dict, pop_dict=pop_dict, demo_dict=demo_dict, hood_dict=hood_dict, crime_dict=crime_dict)
 
 
 @app.route("/twitter/<ID>")
@@ -254,6 +261,10 @@ def crime(ID):
     
     return jsonify(crime_data)
 
+@app.route("/about")
+def about():
+    return("Chicago Community Project: "
+        "Nameyeh Alam, Emre Celik, Maddy Cieslak, Jess Gutierrez, Stefan Sampaleanu")   
 
 if __name__ == '__main__':
     app.run(debug=True)
