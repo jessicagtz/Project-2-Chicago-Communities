@@ -261,6 +261,10 @@ def crime(ID):
     
     return jsonify(crime_data)
 
+@app.route("/crime")
+def crimes():
+    return render_template("crime.html")
+
 @app.route("/about")
 def about():
     return("Chicago Community Project: "
